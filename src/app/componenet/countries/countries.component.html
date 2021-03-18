@@ -1,8 +1,53 @@
-<div class="jumbotron bg-white text-center">
+
+
+
+<div class="jumbotron bg-white text-center country">
+
     <h1 class="display-4">Covid 19 Tracker CountryWise</h1>
        <hr>
-    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-    <hr class="my-4">
-    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-   
+       <div class="mx-auto">
+        <div class="form-group col-lg-5 mx-auto ">
+          <label for="country" >Select country</label>
+           <select name="" class="form-control countryList" id="country"  (change)="updateStatus($event)">
+             <option value="{{c}}"  *ngFor="let c of country">{{c}}</option>
+           </select>
+        </div>
+       </div>
+       <app-dashboard
+     [totalConfirmed]="totalConfirmed"
+     [totalActive]="totalActive"
+     [totalDeaths]="totalDeaths"
+    [totalRecovered]="totalRecovered"
+     ></app-dashboard>
+
+<hr>
+
+
+  <div class="row">
+    <div class="col">
+      <google-chart [data]="lineChart"></google-chart>
+    </div>
+    <div class="col">
+      <table class="table">
+        <thead>
+              <tr>
+               <th>Sno</th>
+               <th>Country</th>
+               <th>Date</th>
+              </tr>
+        </thead>
+        <tbody>
+         <tr *ngFor="let d of selectedCountryData;let i=index">
+           <td>{{i+1}}</td>
+           <td>{{d.date | date}}</td>
+           <td>{{d.cases}}</td>
+          </tr>
+        </tbody>
+
+      </table>
+    </div>
+
   </div>
+  </div>
+
+
